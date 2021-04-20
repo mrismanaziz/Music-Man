@@ -155,12 +155,12 @@ async def playlist(client, message):
 def updated_stats(chat, queue, vol=100):
     if chat.id in callsmusic.pytgcalls.active_calls:
     #if chat.id in active_chats:
-        stats = 'Settings of **{}**'.format(chat.title)
+        stats = '**Pengaturan dari Grup {}**'.format(chat.title)
         if len(que) > 0:
             stats += '\n\n'
             stats += 'Volume : {}%\n'.format(vol)
-            stats += 'Songs in queue : `{}`\n'.format(len(que))
-            stats += 'Now Playing : **{}**\n'.format(queue[0][0])
+            stats += 'Lagu dalam antrian : `{}`\n'.format(len(que))
+            stats += 'Sedang dimainkan : **{}**\n'.format(queue[0][0])
             stats += 'Requested by : {}'.format(queue[0][1].mention)
     else:
         stats = None
@@ -202,7 +202,7 @@ async def ee(client, message):
     if stats:
         await message.reply(stats)              
     else:
-        await message.reply('No VC instances running in this chat')
+        await message.reply('Tidak ada instance VCG yang berjalan dalam grup ini')
 
 @Client.on_message(
     filters.command("player")
@@ -223,7 +223,7 @@ async def settings(client, message):
         else:
             await message.reply(stats, reply_markup=r_ply('play'))
     else:
-        await message.reply('No VC instances running in this chat')
+        await message.reply('Tidak ada instance VCG yang berjalan dalam grup ini')
 
 @Client.on_callback_query(filters.regex(pattern=r'^(playlist)$'))
 async def p_cb(b, cb):
@@ -242,7 +242,7 @@ async def p_cb(b, cb):
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style='md')
-        msg = "**Now Playing** in {}".format(cb.message.chat.title)
+        msg = "**Sedang dimainkan** in {}".format(cb.message.chat.title)
         msg += "\n- "+ now_playing
         msg += "\n- Req by "+by
         temp.pop(0)
@@ -272,7 +272,7 @@ async def m_cb(b, cb):
                 ) or (
                     callsmusic.pytgcalls.active_calls[chat_id] == 'paused'
                 ):
-            await cb.answer('Chat is not connected!', show_alert=True)
+            await cb.answer('Obrolan tidak terhubung!', show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chat_id)
             
@@ -286,7 +286,7 @@ async def m_cb(b, cb):
             ) or (
                 callsmusic.pytgcalls.active_calls[chat_id] == 'playing'
             ):
-                await cb.answer('Chat is not connected!', show_alert=True)
+                await cb.answer('Obrolan tidak terhubung!', show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chat_id)
             await cb.answer('Music Resumed!')
@@ -302,7 +302,7 @@ async def m_cb(b, cb):
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style='md')
-        msg = "**Now Playing** in {}".format(cb.message.chat.title)
+        msg = "**Sedang Memutar** di {}".format(cb.message.chat.title)
         msg += "\n- "+ now_playing
         msg += "\n- Req by "+by
         temp.pop(0)
@@ -322,7 +322,7 @@ async def m_cb(b, cb):
             ) or (
                 callsmusic.pytgcalls.active_calls[chat_id] == 'playing'
             ):
-                await cb.answer('Chat is not connected or already playng', show_alert=True)
+                await cb.answer('Obrolan tidak terhubung atau sudah dimainkan', show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chat_id)
             await cb.answer('Music Resumed!')     
@@ -332,7 +332,7 @@ async def m_cb(b, cb):
                 ) or (
                     callsmusic.pytgcalls.active_calls[chat_id] == 'paused'
                 ):
-            await cb.answer('Chat is not connected or already paused', show_alert=True)
+            await cb.answer('Obrolan tidak terhubung atau sudah dipause', show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chat_id)
             
@@ -367,14 +367,14 @@ async def m_cb(b, cb):
         if qeue:
             skip = qeue.pop(0)
         if chat_id not in callsmusic.pytgcalls.active_calls:
-            await cb.answer('Chat is not connected!', show_alert=True)
+            await cb.answer('Obrolan tidak terhubung!', show_alert=True)
         else:
             callsmusic.queues.task_done(chat_id)
 
             if callsmusic.queues.is_empty(chat_id):
                 callsmusic.pytgcalls.leave_group_call(chat_id)
                 
-                await cb.message.edit('- No More Playlist..\n- Leaving VC!')
+                await cb.message.edit('- Tidak Ada Lagi Daftar Putar..\n- Meninggalkan VCG!')
             else:
                 callsmusic.pytgcalls.change_stream(
                     chat_id,
@@ -382,7 +382,7 @@ async def m_cb(b, cb):
                 )
                 await cb.answer('Skipped')
                 await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
-                await cb.message.reply_text(f'- Skipped track\n- Now Playing **{qeue[0][0]}**')
+                await cb.message.reply_text(f'- Melewati lagu\n- Sedang dimainkan **{qeue[0][0]}**')
 
     else:      
         if chat_id in callsmusic.pytgcalls.active_calls:
@@ -392,14 +392,14 @@ async def m_cb(b, cb):
                 pass
 
             callsmusic.pytgcalls.leave_group_call(chat_id)
-            await cb.message.edit('Successfully Left the Chat!')
+            await cb.message.edit('Berhasil Keluar dari Obrolan!')
         else:
-            await cb.answer('Chat is not connected!', show_alert=True)
+            await cb.answer('Obrolan tidak terhubung!', show_alert=True)
 
 @Client.on_message(command("play") & other_filters)
 async def play(_, message: Message):
     global que
-    lel = await message.reply("🔄 **Processing**")
+    lel = await message.reply("🔄 **Sedang Memproses**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
     usar = await USER.get_me()
@@ -434,12 +434,12 @@ async def play(_, message: Message):
         #lmoa = await _.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            "<i>helper Userbot not in this chat, Ask admin to send /play command for first time or add assistant manually</i>"
+            "<i>helper Userbot tidak ada dalam obrolan ini, Minta admin untuk mengirim /play perintah untuk pertama kalinya atau tambahkan asisten secara manual</i>"
         )
         return    
     sender_id = message.from_user.id
     sender_name = message.from_user.first_name
-    await lel.edit("🔎 **Finding**")
+    await lel.edit("🔎 **Sedang Mencari**")
     sender_id = message.from_user.id
     user_id = message.from_user.id
     sender_name = message.from_user.first_name
@@ -450,7 +450,7 @@ async def play(_, message: Message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    await lel.edit("🎵 **Processing**")
+    await lel.edit("🎵 **Sedang Memproses**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -480,9 +480,11 @@ async def play(_, message: Message):
                 ],                     
                 [
                     InlineKeyboardButton(
-                        text="Owner Music Man",
-                        url="https://t.me/mrismanaziz")
-
+                        "Group Support", url="https://t.me/SharingUserbot"
+                    ),
+                    InlineKeyboardButton(
+                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                    )
                 ],
                 [       
                     InlineKeyboardButton(
@@ -538,7 +540,7 @@ async def play(_, message: Message):
 )
 async def deezer(client: Client, message_: Message):
     global que
-    lel = await message_.reply("🔄 **Processing**")
+    lel = await message_.reply("🔄 **Sedang Memproses**")
     administrators = await get_administrators(message_.chat)
     chid = message_.chat.id
     usar = await USER.get_me()
@@ -611,11 +613,13 @@ async def deezer(client: Client, message_: Message):
                  InlineKeyboardButton('Menu ⏯ ', callback_data='menu')     
              ],                     
              [
-                 InlineKeyboardButton(
-                     text="Listen On Deezer 🎬",
-                     url=f"{url}")
-
-             ],
+                    InlineKeyboardButton(
+                        "Group Support", url="https://t.me/SharingUserbot"
+                    ),
+                    InlineKeyboardButton(
+                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                    )
+                ],
              [       
                  InlineKeyboardButton(
                      text="❌ Close",
@@ -737,10 +741,13 @@ async def jiosaavn(client: Client, message_: Message):
                InlineKeyboardButton('Menu ⏯ ', callback_data='menu')   
              ],                     
              [
-               InlineKeyboardButton(
-                   text="Join Group Support",
-                   url='https://t.me/Sharinguserbot')
-             ],
+                InlineKeyboardButton(
+                        "Group Support", url="https://t.me/SharingUserbot"
+                ),
+                InlineKeyboardButton(
+                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                )
+            ],
              [       
                InlineKeyboardButton(
                    text="❌ Close",
@@ -763,7 +770,7 @@ async def jiosaavn(client: Client, message_: Message):
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo="final.png",
-            caption=f"=#️⃣ Queued at position {position}",
+            caption=f"=#️⃣ Mengantri di posisi {position}",
         
         )           
            
@@ -785,7 +792,7 @@ async def jiosaavn(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"Playing {sname} Via Jiosaavn",
+        caption=f"Memutar Lagu {sname} Via Jiosaavn",
         
     )
     os.remove("final.png")

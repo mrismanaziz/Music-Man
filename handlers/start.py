@@ -32,7 +32,28 @@ async def gstart(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "✨ Group Support ✨", url="https://t.me/SharingUserbot")
+                        "Group Support", url="https://t.me/SharingUserbot"
+                    ),
+                    InlineKeyboardButton(
+                        "Owner", url="https://t.com/mrismanaziz"
+                    )
+                ]
+            ]
+        )
+   )
+
+@Client.on_message(filters.command("reload") & ~filters.private & ~filters.channel)
+async def gstart(_, message: Message):
+      await message.reply_text("""**✣ Pemutar Musik Sedang Online ✣**""",
+      reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Group Support", url="https://t.me/SharingUserbot"
+                    ),
+                    InlineKeyboardButton(
+                        "Owner", url="https://t.com/mrismanaziz"
+                    )
                 ]
             ]
         )
