@@ -6,12 +6,12 @@ from config import BOT_NAME as bn
 @Client.on_message(filters.command("start") & filters.private & ~filters.channel)
 async def start(_, message: Message):
     await message.reply_text(
-        f"""Halo 👋! Saya dapat memutar musik dalam obrolan suara Grup Telegram.\n\n✣ Apakah Anda ingin saya memutar musik di obrolan suara grup Telegram Anda? Silakan klik \'📜 Panduan Menggunakan BOT 📜\' tombol di bawah untuk mengetahui bagaimana cara menggunakan saya.\n\n✣ Tambahkan [Assistant Music Man](https://t.me/botmusikman) ke grup Anda untuk memutar musik di obrolan suara grup Anda.\n\n✣ Info & perintah selengkapnya yang disebutkan di [User Manual](https://telegra.ph/BOT-Music-Man-Voice-Chat-Group-04-16)\n\nManaged With ☕️ By [Risman](https://t.me/mrismanaziz)""",
+        f"""Halo 👋! Saya dapat memutar musik dalam obrolan suara Grup Telegram.\n\n✣ Apakah Anda ingin saya memutar musik di obrolan suara grup Telegram Anda? Silakan klik \'📜 Panduan Menggunakan BOT 📜\' tombol di bawah untuk mengetahui bagaimana cara menggunakan saya.\n\n✣ Tambahkan [Assistant Music Player](https://t.me/GB_Assistant) ke grup Anda untuk memutar musik di obrolan suara grup Anda.\n\n✣ Info & perintah selengkapnya yang disebutkan di [User Manual](https://telegra.ph/GB--MUSIC-PLAYER-04-22)\n\nManaged With ☕️ By [ɢᴏᴏᴅ ʙᴏʏs](https://t.me/GB_03101999)""",
         reply_markup=InlineKeyboardMarkup(
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "📜 Panduan Menggunakan BOT 📜", url="https://telegra.ph/GB--MUSIC-PLAYER-04-22")
                   ],[
                     InlineKeyboardButton(
                         "Group Support", url="https://t.me/SharingUserbot"
@@ -35,7 +35,7 @@ async def gstart(_, message: Message):
                         "Group Support", url="https://t.me/SharingUserbot"
                     ),
                     InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url="https://t.me/GB_03101999"
                     )
                 ]
             ]
@@ -52,7 +52,7 @@ async def gstart(_, message: Message):
                         "Group Support", url="https://t.me/SharingUserbot"
                     ),
                     InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url="https://t.me/GB_03101999"
                     )
                 ]
             ]
