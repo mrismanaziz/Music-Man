@@ -1,0 +1,39 @@
+{
+  "name": "Bot MusicMan",
+  "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
+  "keywords": ["music", "voicechat", "telegram"],
+  "repository": "https://github.com/mrismanaziz/Music-Man",
+  "stack": "container",
+  "env": {
+    "SESSION_NAME": {
+      "description": "Masukan String Session Pyrogram untuk assistant yang naik ke VCG",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Masukan Bot Token dari @BotFather",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "Masukan Nama Bot MusicPlayer Mu.",
+      "required": false,
+      "value": ""
+    },
+    "API_ID": {
+      "description": "Masukan APP ID Silahkan Ambil dari my.telegram.org/apps",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Masukan API HASH Silahkan Ambil dari my.telegram.org/apps",
+      "required": true
+    },
+    "SUDO_USERS": {
+      "description": "Daftar User ID pengguna dihitung sebagai admin di semua tempat (pemisah menggunakan space).",
+      "required": true
+    },
+    "DURATION_LIMIT": {
+      "description": "Batas durasi audio maksimal untuk download (minutes).",
+      "required": true,
+      "value": "15"
+    }
+  }
+}
