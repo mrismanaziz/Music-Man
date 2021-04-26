@@ -1,4 +1,4 @@
-<h1 align="centre">🎵 BOT MUSIC MAN 🎵</h1>
+<h1 align="centre">🎵 MUSSIC SANTAI 🎵</h1>
 
 ### A bot that can play music on telegram group's voice call
 
@@ -42,7 +42,7 @@
 
 ### Deploy To Heroku</h4>
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrismanaziz/Music-Man)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ramadhan73/Music-Man)
 
 ### Generate String Session
 
