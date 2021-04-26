@@ -511,7 +511,7 @@ async def play(_, message: Message):
                         "Group Support", url="https://t.me/wavyheartt"
                     ),
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://t.me/gksukaribett"
+                        "Owner Mussic", url="https://t.me/gksukaribett"
                     )
                 ],
                 [       
@@ -646,7 +646,7 @@ async def deezer(client: Client, message_: Message):
                         "Group Support", url="https://t.me/wavyheartt"
                     ),
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://t.me/gksukaribett"
+                        "Owner Mussic", url="https://t.me/gksukaribett"
                     )
                 ],
              [       
@@ -782,7 +782,7 @@ async def jiosaavn(client: Client, message_: Message):
                         "Group Support", url="https://t.me/wavyheartt"
                     ),
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://t.me/gksukaribett"
+                        "Owner Mussic", url="https://t.me/gksukaribett"
                     )
                 ],
              [       
