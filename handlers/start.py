@@ -73,7 +73,7 @@ async def gstart(_, message: Message):
                         "Group Support", url="https://t.me/SharingUserbot"
                     ),
                     InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url=""
                     )
                 ]
             ]
