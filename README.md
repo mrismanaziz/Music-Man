@@ -38,7 +38,7 @@
 - `/userbotleave` - remove assistant from your chat
 - `/admincache` - Refresh admin list
 
-## Based on Callsmusic-1 & DAISYXMUSIC
+## Based on Callsmusic-1
 
 ### Deploy To Heroku</h4>
 
