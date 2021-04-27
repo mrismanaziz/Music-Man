@@ -32,14 +32,14 @@ async def start(_, message: Message):
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/infobotmusik")
                   ],[
                     InlineKeyboardButton(
                         "Group ", url="https://t.me/familybrden"
                     ),
 
                     InlineKeyboardButton(
-                        "Channel", url="@noteshati"
+                        "Channel", url="https://t.me/noteshati"
                     )
                 ]
             ]
