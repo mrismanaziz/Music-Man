@@ -33,7 +33,7 @@
     "DURATION_LIMIT": {
       "description": "Batas durasi audio maksimal untuk download (minutes).",
       "required": true,
-      "value": "15"
+      "value": "10"
     }
   }
 }
