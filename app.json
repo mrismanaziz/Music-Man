@@ -2,7 +2,7 @@
   "name": "Bot MusicMan",
   "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
   "keywords": ["music", "voicechat", "telegram"],
-  "repository": "https://github.com/mrismanaziz/Music-Man",
+  "repository": "https://github.com/Aliamandadewi11/Music-Man",
   "stack": "container",
   "env": {
     "SESSION_NAME": {
