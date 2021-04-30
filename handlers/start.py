@@ -14,14 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from config import BOT_NAME as bn
-
-
 
 
 @Client.on_message(filters.command("start") & filters.private & ~filters.channel)
@@ -79,3 +75,19 @@ async def gstart(_, message: Message):
             ]
         )
    )
+
+
+@Client.on_message(filters.command("help") & ~filters.private & ~filters.channel)
+async def gstart(_, message: Message):
+    await message.reply_text(
+        """**Klik Tombol dibawah untuk Melihat Panduan Menggunakan Bot**""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
+                    )
+                ]
+            ]
+        ),
+    )
