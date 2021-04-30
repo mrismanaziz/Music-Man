@@ -376,7 +376,7 @@ async def m_cb(b, cb):
                 
                 ],
                 [       
-                    InlineKeyboardButton("❌ Close",'cls')
+                    InlineKeyboardButton("🗑 Close",'cls')
                 ]        
             ]
         )
@@ -415,6 +415,8 @@ async def m_cb(b, cb):
             await cb.answer('Assistant Sedang Tidak Terhubung dengan VCG', show_alert=True)
 
 @Client.on_message(command("play") & other_filters)
+@errors
+@authorized_users_only
 async def play(_, message: Message):
     global que
     lel = await message.reply("🔄 **Sedang Memproses Lagu**")
@@ -453,7 +455,7 @@ async def play(_, message: Message):
                           except Exception as e:
                               #print(e)
                               await lel.edit(
-                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant {user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
+                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
                                   "\n\nAtau tambahkan secara manual @botmusikman ke Grup Anda dan coba lagi</b>",
                               )
                               pass
@@ -462,7 +464,7 @@ async def play(_, message: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> {user.first_name} Userbot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant {user.first_name} secara manual</i>"
+            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
         )
         return     
     sender_id = message.from_user.id
@@ -494,7 +496,7 @@ async def play(_, message: Message):
         views = results[0]["views"]
 
     except Exception as e:
-        await lel.edit("Lagu tidak ditemukan. Coba cari dengan judul lagu yang lebih jelas")
+        await lel.edit("Lagu tidak ditemukan. Coba cari dengan judul lagu yang lebih jelas, Ketik /help bila butuh bantuan")
         print(str(e))
         return
 
@@ -502,21 +504,18 @@ async def play(_, message: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-                    InlineKeyboardButton('Menu ⏯ ', callback_data='menu')
+                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
+                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
                 
                 ],                     
                 [
-                    InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
                     InlineKeyboardButton(
                         "Owner Music Man", url="https://instagram.com/mrismanaziz_"
                     )
                 ],
                 [       
                     InlineKeyboardButton(
-                        text="❌ Close",
+                        text="🗑 Close",
                         callback_data='cls')
 
                 ]                             
@@ -536,7 +535,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
         photo="final.png", 
-        caption=f"#⃣ Lagu yang Anda minta **Sedang Antri** di posisi {position}!",
+        caption=f"🎼 Lagu yang Anda minta **Sedang Antri** di posisi {position}!",
         reply_markup=keyboard)
         os.remove("final.png")
         return await lel.delete()
@@ -553,7 +552,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="final.png",
         reply_markup=keyboard,
-        caption="▶️ **Memutar** Lagu Permintaan dari {}".format(
+        caption="🎼️ **Sedang Memutar** Lagu Permintaan dari {}".format(
         message.from_user.mention()
         ),
     )
@@ -566,6 +565,7 @@ async def play(_, message: Message):
     & filters.group
     & ~ filters.edited
 )
+@authorized_users_only
 async def deezer(client: Client, message_: Message):
     global que
     lel = await message_.reply("🔄 **Sedang Memproses Lagu**")
@@ -603,7 +603,7 @@ async def deezer(client: Client, message_: Message):
                           except Exception as e:
                               #print(e)
                               await lel.edit(
-                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant {user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
+                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
                                   "\n\nAtau tambahkan secara manual @botmusikman ke Grup Anda dan coba lagi</b>",
                               )
                               pass
@@ -612,7 +612,7 @@ async def deezer(client: Client, message_: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> {user.first_name} Userbot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant {user.first_name} secara manual</i>"
+            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
         )
         return                            
     requested_by = message_.from_user.first_name   
@@ -636,26 +636,25 @@ async def deezer(client: Client, message_: Message):
         is_playing = False
         return
     keyboard = InlineKeyboardMarkup(
-         [   
-             [
-                 InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-                 InlineKeyboardButton('Menu ⏯ ', callback_data='menu')     
-             ],                     
-             [
-                    InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
+            [   
+                [
+                               
+                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
+                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
+                
+                ],                     
+                [
                     InlineKeyboardButton(
                         "Owner Music Man", url="https://instagram.com/mrismanaziz_"
                     )
                 ],
-             [       
-                 InlineKeyboardButton(
-                     text="❌ Close",
-                     callback_data='cls')
+                [       
+                    InlineKeyboardButton(
+                        text="🗑 Close",
+                        callback_data='cls')
 
-            ]                      
-         ]
+                ]                             
+            ]
      )
     file_path= await converter.convert(wget.download(url))
     await res.edit("Generating Thumbnail")
@@ -688,7 +687,7 @@ async def deezer(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"▶️ **Sedang Memutar** Lagu [{title}]({url}) Via Deezer"
+        caption=f"🎼️ **Sedang Memutar** Lagu [{title}]({url}) Via Deezer"
     ) 
     os.remove("final.png")
 
@@ -698,6 +697,7 @@ async def deezer(client: Client, message_: Message):
     & filters.group
     & ~ filters.edited
 )
+@authorized_users_only
 async def jiosaavn(client: Client, message_: Message):
     global que
     lel = await message_.reply("🔄 **Sedang Memproses Lagu**")
@@ -735,8 +735,8 @@ async def jiosaavn(client: Client, message_: Message):
                           except Exception as e:
                               #print(e)
                               await lel.edit(
-                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant {user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                                  "\n\nAtau tambahkan secara manual @botmusikman ke Grup Anda dan coba lagi</b>",
+                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
+                                  "\n\nAtau tambahkan secara manual Assistant Bot ke Grup Anda dan coba lagi</b>",
                               )
                               pass
     try:
@@ -744,7 +744,7 @@ async def jiosaavn(client: Client, message_: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> {user.first_name} Userbot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant {user.first_name} secara manual</i>"
+            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
         )
         return     
     requested_by = message_.from_user.first_name
@@ -772,26 +772,25 @@ async def jiosaavn(client: Client, message_: Message):
         is_playing = False
         return
     keyboard = InlineKeyboardMarkup(
-         [   
-             [
-               InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-               InlineKeyboardButton('Menu ⏯ ', callback_data='menu')   
-             ],                     
-             [
-                    InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
+            [   
+                [
+                               
+                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
+                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
+                
+                ],                     
+                [
                     InlineKeyboardButton(
                         "Owner Music Man", url="https://instagram.com/mrismanaziz_"
                     )
                 ],
-             [       
-               InlineKeyboardButton(
-                   text="❌ Close",
-                   callback_data='cls')
+                [       
+                    InlineKeyboardButton(
+                        text="🗑 Close",
+                        callback_data='cls')
 
-            ]                          
-         ]
+                ]                             
+            ]
      )
     file_path= await converter.convert(wget.download(slink))
     if message_.chat.id in callsmusic.pytgcalls.active_calls:
@@ -807,7 +806,7 @@ async def jiosaavn(client: Client, message_: Message):
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo="final.png",
-            caption=f"#️⃣ Lagu yang Anda minta **Sedang Antri** di posisi {position}",
+            caption=f"🎼️ Lagu yang Anda minta **Sedang Antri** di posisi {position}",
         
         )           
            
@@ -829,7 +828,7 @@ async def jiosaavn(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"**Sedang Memutar** Lagu {sname} Via Jiosaavn",
+        caption=f"🎼️ **Sedang Memutar** Lagu {sname} Via Jiosaavn",
         
     )
     os.remove("final.png")
