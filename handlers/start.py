@@ -20,15 +20,35 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from config import BOT_NAME as bn
 
 
-@Client.on_message(filters.command("start") & filters.private & ~filters.channel)
-async def start(_, message: Message):
+@Client.on_message(
+    filters.command("start")
+    & filters.private
+    & ~ filters.edited
+)
+async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""Halo 👋! Saya dapat memutar musik dalam obrolan suara Grup Telegram.\n\n✣ Apakah Anda ingin saya memutar musik di obrolan suara grup Telegram Anda? Silakan klik \'📜 Panduan Menggunakan BOT 📜\' tombol di bawah untuk mengetahui bagaimana cara menggunakan saya.\n\n✣ Tambahkan [Assistant Music Man](https://t.me/botmusikman) ke grup Anda untuk memutar musik di obrolan suara grup Anda.\n\nManaged With ☕️ By [Risman](https://t.me/mrismanaziz)""",
+        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙈𝙐𝙎𝙄𝘾 𝙈𝘼𝙉 ┏┛\n
+Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
+Saya Memiliki Banyak Fitur Praktis Seperti :
+┏━━━━━━━━━━━━━━
+┣• Memutar Musik.
+┣• Mendownload Lagu.
+┣• Mencari Lagu Yang ingin di Putar atau di Download.
+┗━━━━━━━━━━━━━━
+❃ Managed With ☕️ By : [Risman](https://t.me/mrismanaziz)
+❃ Thanks To : [Risman](https://t.me/mrismanaziz)
+━━━━━━━━━━━━━━━
+Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
+</b>""",
+
+# Edit Yang Perlu Lu ganti 
+# Tapi Jangan di Hapus Thanks To nya Yaaa :D
+
         reply_markup=InlineKeyboardMarkup(
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
                   ],[
                     InlineKeyboardButton(
                         "Group Support", url="https://t.me/SharingUserbot"
@@ -39,55 +59,68 @@ async def start(_, message: Message):
                 ]
             ]
         ),
-     disable_web_page_preview=True
+     disable_web_page_preview=False
     )
 
-@Client.on_message(filters.command("start") & ~filters.private & ~filters.channel)
-async def gstart(_, message: Message):
-      await message.reply_text("""✅ **Pemutar Musik Sedang Online**""",
-      reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
-                    InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
-                    )
-                ]
-            ]
-        )
-   )
-
-@Client.on_message(filters.command("reload") & ~filters.private & ~filters.channel)
-async def gstart(_, message: Message):
-      await message.reply_text("""✅ **Pemutar Musik Sedang Online **""",
-      reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
-                    InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
-                    )
-                ]
-            ]
-        )
-   )
-
-
-@Client.on_message(filters.command("help") & ~filters.private & ~filters.channel)
-async def gstart(_, message: Message):
+@Client.on_message(
+    filters.command("start")
+    & filters.group
+    & ~ filters.edited
+)
+async def start(client: Client, message: Message):
     await message.reply_text(
-        """**Klik Tombol dibawah untuk Melihat Panduan Menggunakan Bot**""",
+        "💁🏻‍♂️ **Apakah Anda ingin mencari Link YouTube?**",
+        reply_markup=InlineKeyboardMarkup(
+            [   
+                [    
+                    InlineKeyboardButton(
+                        "✅ Ya", switch_inline_query_current_chat=""
+                    ),
+                    InlineKeyboardButton(
+                        "❌ Tidak ", callback_data="close"
+                    )
+                ]
+            ]
+        )
+    )
+
+@Client.on_message(
+    filters.command("help")
+    & filters.group
+    & ~ filters.edited
+)
+async def help(client: Client, message: Message):
+    await message.reply_text(
+        """**Klik Tombol dibawah untuk Melihat Cara Menggunakan Bot**""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "📜 Panduan Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
+                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
                     )
                 ]
             ]
         ),
-    )
+    )  
+
+
+@Client.on_message(
+    filters.command("reload")
+    & filters.group
+    & ~ filters.edited
+)
+async def reload(client: Client, message: Message):
+    await message.reply_text("""✅ Bot **berhasil dimulai ulang!**\n\n• **Daftar admin** telah **diperbarui**""",
+      reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Group Support", url="https://t.me/SharingUserbot"
+                    ),
+                    InlineKeyboardButton(
+                        "Owner", url="https://t.me/mrismanaziz"
+                    )
+                ]
+            ]
+        )
+   )
