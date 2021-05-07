@@ -27,7 +27,7 @@ from config import BOT_NAME as bn
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙈𝙐𝙎𝙄𝘾 𝙈𝘼𝙉 ┏┛\n
+        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙈𝙀𝙏𝘼𝙈𝙊𝙍𝙁𝙊𝙕𝘼┏┛\n
 Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
 Saya Memiliki Banyak Fitur Praktis Seperti :
 ┏━━━━━━━━━━━━━━
@@ -35,8 +35,8 @@ Saya Memiliki Banyak Fitur Praktis Seperti :
 ┣• Mendownload Lagu.
 ┣• Mencari Lagu Yang ingin di Putar atau di Download.
 ┗━━━━━━━━━━━━━━
-❃ Managed With ☕️ By : [Risman](https://t.me/mrismanaziz)
-❃ Thanks To : [Risman](https://t.me/mrismanaziz)
+❃ Managed With ☕️ By : [Mixmaxx](https://t.me/shockingshoda)
+❃ Thanks To : [Rama](https://t.me/gksukaribett)
 ━━━━━━━━━━━━━━━
 Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
 </b>""",
@@ -48,13 +48,13 @@ Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "📜 Cara Menggunakan BOT 📜", url="https://telegra.ph/𝙈𝙚𝙩𝙖𝙢𝙤𝙧𝙛𝙤𝙯𝙖-05-07")
                   ],[
                     InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
+                        "Group Support", url="https://t.me/Rebahanofglory"
                     ),
                     InlineKeyboardButton(
-                        "Channel", url="https://t.me/Lunatic0de"
+                        "Owner", url="https://t.me/shockingshoda"
                     )
                 ]
             ]
@@ -96,7 +96,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
+                        "📜 Cara Menggunakan BOT 📜", url="https://telegra.ph/𝙈𝙚𝙩𝙖𝙢𝙤𝙧𝙛𝙤𝙯𝙖-05-07"
                     )
                 ]
             ]
@@ -115,10 +115,10 @@ async def reload(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
+                        "Group Support", url="https://t.me/Rebahanofglory"
                     ),
                     InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url="https://t.me/shockingshoda"
                     )
                 ]
             ]
