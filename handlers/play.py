@@ -604,7 +604,7 @@ async def deezer(client: Client, message_: Message):
                               #print(e)
                               await lel.edit(
                                   f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                                  "\n\nAtau tambahkan secara manual @metamorfozaa_bot ke Grup Anda dan coba lagi</b>",
+                                  "\n\nAtau tambahkan secara manual @Assistenmetamusic ke Grup Anda dan coba lagi</b>",
                               )
                               pass
     try:
@@ -645,7 +645,7 @@ async def deezer(client: Client, message_: Message):
                 ],                     
                 [
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://t.me/@Shockingshoda"
+                        "Owner", url="https://t.me/@Shockingshoda"
                     )
                 ],
                 [       
@@ -781,7 +781,7 @@ async def jiosaavn(client: Client, message_: Message):
                 ],                     
                 [
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://t.me/Shockingshoda"
+                        "Owner", url="https://t.me/Shockingshoda"
                     )
                 ],
                 [       
