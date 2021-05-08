@@ -69,7 +69,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer('You ain\'t allowed!', show_alert=True)
+            await cb.answer('Anda tidak diizinkan!', show_alert=True)
             return
     return decorator                                                                       
                                           
@@ -122,13 +122,13 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("etc/font.otf", 32)
-    draw.text((205, 550), f"Title: {title}", (51, 215, 255), font=font)
+    draw.text((205, 550), f"Judul Lagu: {title}", (51, 215, 255), font=font)
     draw.text(
-        (205, 590), f"Duration: {duration}", (255, 255, 255), font=font
+        (205, 590), f"Durasi: {duration}", (255, 255, 255), font=font
     )
-    draw.text((205, 630), f"Views: {views}", (255, 255, 255), font=font)
+    draw.text((205, 630), f"Dilihat: {views}", (255, 255, 255), font=font)
     draw.text((205, 670),
-        f"Added By: {requested_by}",
+        f"Ditambahkan oleh: {requested_by}",
         (255, 255, 255),
         font=font,
     )
@@ -456,7 +456,7 @@ async def play(_, message: Message):
                               #print(e)
                               await lel.edit(
                                   f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                                  "\n\nAtau tambahkan secara manual @botmusikman ke Grup Anda dan coba lagi</b>",
+                                  "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi</b>",
                               )
                               pass
     try:
@@ -496,7 +496,7 @@ async def play(_, message: Message):
         views = results[0]["views"]
 
     except Exception as e:
-        await lel.edit("Lagu tidak ditemukan. Coba cari dengan judul lagu yang lebih jelas, Ketik /help bila butuh bantuan")
+        await lel.edit("**Lagu tidak ditemukan.** Coba cari dengan judul lagu yang lebih jelas, Ketik `/help` bila butuh bantuan")
         print(str(e))
         return
 
@@ -535,7 +535,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
         photo="final.png", 
-        caption=f"🎼 Lagu yang Anda minta **Sedang Antri** di posisi {position}!",
+        caption=f"🎼 **Lagu yang Anda minta Sedang Antri di posisi** {position}!",
         reply_markup=keyboard)
         os.remove("final.png")
         return await lel.delete()
@@ -552,7 +552,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="final.png",
         reply_markup=keyboard,
-        caption="🎼️ **Sedang Memutar** Lagu Permintaan dari {}".format(
+        caption="🎼️ **Sedang Memutar Lagu Permintaan dari** {}".format(
         message.from_user.mention()
         ),
     )
@@ -604,7 +604,7 @@ async def deezer(client: Client, message_: Message):
                               #print(e)
                               await lel.edit(
                                   f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                                  "\n\nAtau tambahkan secara manual @botmusikman ke Grup Anda dan coba lagi</b>",
+                                  "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi</b>",
                               )
                               pass
     try:
@@ -620,7 +620,7 @@ async def deezer(client: Client, message_: Message):
     text = message_.text.split(" ", 1)
     queryy = text[1]
     res = lel
-    await res.edit(f"Mencari 👀👀👀 `{queryy}` dari deezer")
+    await res.edit(f"**Mencari** 👀👀👀 `{queryy}` **dari deezer**")
     try:
         arq = ARQ("https://thearq.tech")
         r = await arq.deezer(query=queryy, limit=1)
@@ -668,7 +668,7 @@ async def deezer(client: Client, message_: Message):
         loc = file_path
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
-        await res.edit_text(f"#️⃣ Lagu yang Anda minta **Sedang Antri** di posisi {position}")
+        await res.edit_text(f"🎼 **Lagu yang Anda minta Sedang Antri di posisi** {position}")
     else:
         await res.edit_text("Playing.....")
         chat_id = message_.chat.id
@@ -687,7 +687,7 @@ async def deezer(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"🎼️ **Sedang Memutar** Lagu [{title}]({url}) Via Deezer"
+        caption=f"🎼️ **Sedang Memutar Lagu** [{title}]({url}) **Via Deezer**"
     ) 
     os.remove("final.png")
 
@@ -806,7 +806,7 @@ async def jiosaavn(client: Client, message_: Message):
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo="final.png",
-            caption=f"🎼️ Lagu yang Anda minta **Sedang Antri** di posisi {position}",
+            caption=f"🎼️ **Lagu yang Anda minta Sedang Antri di posisi** {position}",
         
         )           
            
@@ -828,7 +828,7 @@ async def jiosaavn(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"🎼️ **Sedang Memutar** Lagu {sname} Via Jiosaavn",
+        caption=f"🎼️ **Sedang Memutar Lagu** {sname} **Via Jiosaavn**",
         
     )
     os.remove("final.png")
