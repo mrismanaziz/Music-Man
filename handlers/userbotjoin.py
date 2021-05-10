@@ -32,18 +32,18 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Tambahkan saya sebagai admin grup Anda terlebih dahulu</b>",
+            "<b>Tambahkan saya sebagai admin di grup kamu</b>",
         )
         return
 
     try:
         user = await USER.get_me()
     except:
-        user.first_name =  "MusicMan"
+        user.first_name =  "Musik Assistant"
 
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id,"Saya bergabung di sini seperti yang Anda minta")
+        await USER.send_message(message.chat.id,"Saya bergabung untuk memutar musik yang kamu inginkan")
     except UserAlreadyParticipant:
         await message.reply_text(
             "<b>Helper sudah ada di obrolan Anda</b>",
@@ -53,7 +53,7 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>⛑ Flood Wait Error ⛑ \n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-            "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi.</b>",
+            "\n\nAtau tambahkan Musik Assistant secara manual ke Grup Anda dan coba lagi.</b>",
         )
         return
     await message.reply_text(
