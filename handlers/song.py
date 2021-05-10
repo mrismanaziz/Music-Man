@@ -68,11 +68,11 @@ def song(client, message):
 
     except Exception as e:
         m.edit(
-            "❌ Lagu Tidak ditemukan.\n\nCoba Masukan nama lagu yang lebih jelas."
+            "Lagu tidak ditemukan.\n\nMasukan judul dengan jelas."
         )
         print(str(e))
         return
-    m.edit("Sedang Mendownload Lagu")
+    m.edit("Sedang mendownload lagu")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -383,7 +383,7 @@ async def ytmusic(client,message: Message):
 
             if duration > 10:
                 await pablo.edit(
-                    f"❌ Video berdurasi lebih dari 10 menit tidak diperbolehkan, video yang disediakan diperbolehkan {duration} minute(s)"
+                    f"Durasi terlalu panjang"
                 )
                 is_downloading = False
                 return
