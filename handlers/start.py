@@ -27,18 +27,19 @@ from config import BOT_NAME as bn
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙈𝙐𝙎𝙄𝘾 𝙈𝘼𝙉 ┏┛\n
-Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
-Saya Memiliki Banyak Fitur Praktis Seperti :
-┏━━━━━━━━━━━━━━
-┣• Memutar Musik.
-┣• Mendownload Lagu.
-┣• Mencari Lagu Yang ingin di Putar atau di Download.
-┗━━━━━━━━━━━━━━
-❃ Managed With ☕️ By : [Risman](https://t.me/mrismanaziz)
-❃ Thanks To : [Risman](https://t.me/mrismanaziz)
-━━━━━━━━━━━━━━━
-Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
+        f"""<b> ☬ Hai {message.from_user.first_name} welcome to 𝑭𝑯 𝑴𝑼𝑺𝑰𝑲 ☬\n
+𝑭𝑯 𝑴𝑼𝑺𝑰𝑲 adalah Bot Music yang dapat memutar lagu di Voice Chat Group.
+Saya memiliki fitur :
+┏━━
+✦҈͜͡➳ Memutar musik.
+✦҈͜͡➳ Mendownload lagu.
+✦҈͜͡➳ Mencari lagu yang ingin kamu putar atau Download.
+┗━━
+❃ Managed with by : [Ahmdrzii](https://t.me/ahmdrzii88)
+❃ Thanks to : [Risman](https://t.me/mrismanaziz)
+
+☞ Ingin menambahkan saya ke grup?
+☞ Tambahkan saya dan [Musik Assistant](t.me/MusicAssistant88) ke Group kamu!
 </b>""",
 
 # Edit Yang Perlu Lu ganti 
@@ -48,13 +49,13 @@ Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "Cara menggunakan BOT", url="https://t.me/Lunatic0de/20")
                   ],[
                     InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
+                        "Join Grup", url="https://t.me/gabutgabutonline"
                     ),
                     InlineKeyboardButton(
-                        "Channel", url="https://t.me/Lunatic0de"
+                        "Join Channel", url="https://t.me/katasecangkir"
                     )
                 ]
             ]
@@ -96,7 +97,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
+                        "Cara menggunakan BOT", url="https://t.me/Lunatic0de/20"
                     )
                 ]
             ]
@@ -110,15 +111,12 @@ async def help(client: Client, message: Message):
     & ~ filters.edited
 )
 async def reload(client: Client, message: Message):
-    await message.reply_text("""✅ Bot **berhasil dimulai ulang!**\n\n• **Daftar admin** telah **diperbarui**""",
+    await message.reply_text("""✅ Bot **berhasil dimulai ulang!**\n\n✅ **Daftar admin** telah **diperbarui**""",
       reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Group Support", url="https://t.me/SharingUserbot"
-                    ),
-                    InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url="https://t.me/SweetKillerBot"
                     )
                 ]
             ]
