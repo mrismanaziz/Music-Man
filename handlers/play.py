@@ -192,18 +192,17 @@ def r_ply(type_):
     mar = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton('⏹', 'leave'),
                 InlineKeyboardButton('⏸', 'puse'),
                 InlineKeyboardButton('▶️', 'resume'),
                 InlineKeyboardButton('⏭', 'skip')
                 
             ],
             [
-                InlineKeyboardButton('Playlist 📖', 'playlist'),
+                InlineKeyboardButton('Playlist', 'playlist'),
                 
             ],
             [       
-                InlineKeyboardButton("❌ Close",'cls')
+                InlineKeyboardButton("🗑️ Close",'cls')
             ]        
         ]
     )
@@ -220,7 +219,7 @@ async def ee(client, message):
     if stats:
         await message.reply(stats)              
     else:
-        await message.reply('Silahkan Nyalakan dulu VCG nya!')
+        await message.reply('Silahkan nyalakan Obrolan Suara terlebih dahulu!')
 
 @Client.on_message(
     filters.command("player")
@@ -290,7 +289,7 @@ async def m_cb(b, cb):
                 ) or (
                     callsmusic.pytgcalls.active_calls[chat_id] == 'paused'
                 ):
-            await cb.answer('Assistant Sedang Tidak Terhubung dengan VCG', show_alert=True)
+            await cb.answer('Assistant Sedang Tidak Terhubung dengan Obrolan Suara', show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chat_id)
             
@@ -365,14 +364,13 @@ async def m_cb(b, cb):
         marr = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton('⏹', 'leave'),
                     InlineKeyboardButton('⏸', 'puse'),
                     InlineKeyboardButton('▶️', 'resume'),
                     InlineKeyboardButton('⏭', 'skip')
                 
                 ],
                 [
-                    InlineKeyboardButton('Playlist 📖', 'playlist'),
+                    InlineKeyboardButton('Playlist', 'playlist'),
                 
                 ],
                 [       
@@ -385,7 +383,7 @@ async def m_cb(b, cb):
         if qeue:
             skip = qeue.pop(0)
         if chat_id not in callsmusic.pytgcalls.active_calls:
-            await cb.answer('Assistant Sedang Tidak Terhubung dengan VCG', show_alert=True)
+            await cb.answer('Assistant sedang tidak terhubung dengan Obrolan Suara ', show_alert=True)
         else:
             callsmusic.queues.task_done(chat_id)
 
@@ -412,7 +410,7 @@ async def m_cb(b, cb):
             callsmusic.pytgcalls.leave_group_call(chat_id)
             await cb.message.edit('Berhasil Keluar dari Group!')
         else:
-            await cb.answer('Assistant Sedang Tidak Terhubung dengan VCG', show_alert=True)
+            await cb.answer('Assistant sedang tidak terhubung dengan Obrolan Suara', show_alert=True)
 
 @Client.on_message(command("play") & other_filters)
 @errors
@@ -464,7 +462,7 @@ async def play(_, message: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
+            f"<i> Music Assistant tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
         )
         return     
     sender_id = message.from_user.id
@@ -504,13 +502,12 @@ async def play(_, message: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
-                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
+                    InlineKeyboardButton('Daftar Putar', callback_data='playlist'),
                 
                 ],                     
                 [
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                        "Owner FH MUSIC", url="https://t.me/SweetKillerBot"
                     )
                 ],
                 [       
@@ -612,7 +609,7 @@ async def deezer(client: Client, message_: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
+            f"<i> Music Assistant tidak ada dalam grup ini, Minta admin untuk tambahkan Music Assistant secara manual</i>"
         )
         return                            
     requested_by = message_.from_user.first_name   
@@ -639,13 +636,12 @@ async def deezer(client: Client, message_: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
-                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
+                    InlineKeyboardButton('Daftar Putar', callback_data='playlist'),
                 
                 ],                     
                 [
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                        "Owner FH MUSIC", url="https://t.me/SweetKillerBot"
                     )
                 ],
                 [       
@@ -735,8 +731,8 @@ async def jiosaavn(client: Client, message_: Message):
                           except Exception as e:
                               #print(e)
                               await lel.edit(
-                                  f"<b>🔴 Flood Wait Error 🔴 \nAssistant Bot tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                                  "\n\nAtau tambahkan secara manual Assistant Bot ke Grup Anda dan coba lagi</b>",
+                                  f"<b>🔴 Flood Wait Error 🔴 \nMusic Assistant tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
+                                  "\n\nAtau tambahkan secara manual Music Assistant ke Grup Anda dan coba lagi</b>",
                               )
                               pass
     try:
@@ -744,7 +740,7 @@ async def jiosaavn(client: Client, message_: Message):
         #lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> Assistant Bot tidak ada dalam grup ini, Minta admin untuk tambahkan Assistant Bot secara manual</i>"
+            f"<i> Music Assistant tidak ada dalam grup ini, Minta admin untuk tambahkan Music Assistant secara manual</i>"
         )
         return     
     requested_by = message_.from_user.first_name
@@ -775,13 +771,12 @@ async def jiosaavn(client: Client, message_: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Daftar Putar', callback_data='playlist'),
-                    InlineKeyboardButton("⛑ Group Support", url="https://t.me/SharingUserbot")
+                    InlineKeyboardButton('Daftar Putar', callback_data='playlist'),
                 
                 ],                     
                 [
                     InlineKeyboardButton(
-                        "Owner Music Man", url="https://instagram.com/mrismanaziz_"
+                        "Owner FH MUSIC", url="https://t.me/SweetKillerBot"
                     )
                 ],
                 [       
