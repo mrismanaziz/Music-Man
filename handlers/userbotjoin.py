@@ -53,7 +53,7 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>⛑ Flood Wait Error ⛑ \n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-            "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi.</b>",
+            "\n\nAtau tambahkan Music Assistant secara manual ke Grup Anda dan coba lagi.</b>",
         )
         return
     await message.reply_text(
