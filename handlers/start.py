@@ -28,18 +28,18 @@ from config import BOT_NAME as bn
 async def start_(client: Client, message: Message):
     await message.reply_text(
         f"""<b>☬ Hai {message.from_user.first_name} welcome to 𝑭𝑯 𝑴𝑼𝑺𝑰𝑲 ☬\n
-𝑭𝑯 𝑴𝑼𝑺𝑰𝑲 adalah Bot Music yang dapat memutar lagu di Voice Chat Group.
-Saya memiliki fitur :
+𝑭𝑯 𝑴𝑼𝑺𝑰𝑲 adalah Bot Music yang dapat memutar lagu di Voice Chat Group anda. Saya memiliki fitur :
 ┏━
 ✦҈͜͡➳ Memutar musik.
 ✦҈͜͡➳ Mendownload lagu.
 ✦҈͜͡➳ Mencari lagu yang ingin di putar atau di download.
 ┗━
-✥ Managed by : [ROZI](https://t.me/ahmdrzii88)
-✥ Thanks to : [RISMAN](https://t.me/mrismanaziz)
+✥ Managed by : [ᴘᴀᴛʀɪᴄᴋ](https://t.me/SweetKillerBot)
+✥ Thanks to : [Risman](https://t.me/mrismanaziz)
 
 ☞ Ingin nenambahkan saya ke Grup anda?
 ☞ Tambahkan saya dan [Musik Assistant](https://t.me/MusicAssistant88) ke Group anda!
+☞ Jangan lupa menambahkannya menjadi Admin.
 </b>""",
 
 # Edit Yang Perlu Lu ganti 
