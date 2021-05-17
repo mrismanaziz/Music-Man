@@ -483,7 +483,7 @@ async def play(_, message: Message):
         views = "Ditambahkan secara Local"
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await MusicMan.services.converter.convert(
+        file_path = await converter.convert(
             (await message.reply_to_message.download(file_name))
             if not path.isfile(path.join("downloads", file_name))
             else file_name
