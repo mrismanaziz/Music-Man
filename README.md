@@ -1,8 +1,8 @@
-<h1 align="centre">🎵 BOT MUSIC MAN 🎵</h1>
+<h1 align="centre">🎵 PIKACHU MUSIC 🎵</h1>
 
 ### A bot that can play music on telegram group's voice call
 #### BASED ON [CALLSMUSIC](https://github.com/callsmusic/callsmusic)
-# Available on telegram as @MusikManbot
+# Available on telegram as @inipikachu
 
 <h2> Whats new 🔥 </h2>
 
