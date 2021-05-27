@@ -47,8 +47,9 @@ from MusicMan.services.callsmusic.callsmusic import client as USER
 from MusicMan.services.converter.converter import convert
 from MusicMan.services.downloaders import youtube
 
+aiohttpsession = aiohttp.ClientSession()
 chat_id = None
-arq = ARQ("https://thearq.tech", ARQ_API_KEY)
+arq = ARQ("https://thearq.tech", ARQ_API_KEY, aiohttpsession)
 
 
 def cb_admin_check(func: Callable) -> Callable:
