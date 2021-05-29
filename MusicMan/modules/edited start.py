@@ -26,7 +26,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙈𝙐𝙎𝙄𝘾 𝙈𝘼𝙉 ┏┛\n
+        f"""<b>┗┓ Haii {message.from_user.first_name} My Name is 𝙐𝙉𝙄𝙏𝙔 𝙈𝙐𝙎𝙄𝘾𝘽𝙊𝙏 ┏┛\n
 Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
 Saya Memiliki Banyak Fitur Praktis Seperti :
 ┏━━━━━━━━━━━━━━
@@ -34,7 +34,7 @@ Saya Memiliki Banyak Fitur Praktis Seperti :
 ┣• Mendownload Lagu.
 ┣• Mencari Lagu Yang ingin di Putar atau di Download.
 ┗━━━━━━━━━━━━━━
-❃ Managed With ☕️ By : [Risman](https://t.me/mrismanaziz)
+❃ Managed With ☕️ By : [Rizky](https://t.me/Nopegoodloking)
 ━━━━━━━━━━━━━━━
 Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
 </b>""",
@@ -46,13 +46,13 @@ Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20")
+                        "📜 Cara Menggunakan BOT 📜", url="https://telegra.ph/CARA-MENGGUNAKAN-UNITY-MUSICBOT-05-29")
                   ],[
                     InlineKeyboardButton(
                         "Group Support", url="https://t.me/SharingUserbot"
-                    ),
-                    InlineKeyboardButton(
-                        "Channel", url="https://t.me/Lunatic0de"
+
+
+
                     )
                 ]
             ]
@@ -67,7 +67,7 @@ Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
 )
 async def start(client: Client, message: Message):
     await message.reply_text(
-        "💁🏻‍♂️ **Apakah Anda ingin mencari Link YouTube?**",
+        "💁🏻‍♂️ **Hallo Unity Disini, Apakah Anda ingin mencari lagu atau video dari YouTube?**",
         reply_markup=InlineKeyboardMarkup(
             [   
                 [    
@@ -94,7 +94,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url="https://t.me/Lunatic0de/20"
+                        "📜 Cara Menggunakan BOT 📜", url="https://telegra.ph/CARA-MENGGUNAKAN-UNITY-MUSICBOT-05-29"
                     )
                 ]
             ]
@@ -116,7 +116,7 @@ async def reload(client: Client, message: Message):
                         "Group Support", url="https://t.me/SharingUserbot"
                     ),
                     InlineKeyboardButton(
-                        "Owner", url="https://t.me/mrismanaziz"
+                        "Owner", url="https://t.me/Nopegoodloking"
                     )
                 ]
             ]
