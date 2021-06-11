@@ -4,6 +4,11 @@
   "keywords": ["music", "voicechat", "telegram"],
   "repository": "https://github.com/mrismanaziz/Music-Man",
   "stack": "container",
+  "buildpacks": [
+   {
+     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+   }   
+  ], 
   "env": {
     "SESSION_NAME": {
       "description": "Masukan String Session Pyrogram (P) untuk assistant yang naik ke VCG",
