@@ -600,9 +600,9 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"🎼 **Lagu yang Anda minta Sedang Antri di posisi** `{position}`",
-            reply_markup=keyboard,
-        )
+            caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n" \
+                    + f"🎼 **Request Dari:** {message.from_user.mention}",
+                   reply_markup=keyboard)
         os.remove("final.png")
         return await lel.delete()
     else:
@@ -621,11 +621,9 @@ async def play(_, message: Message):
             return
         await message.reply_photo(
             photo="final.png",
-            reply_markup=keyboard,
-            caption="🎼️ **Sedang Memutar Lagu Permintaan dari** {}".format(
-                message.from_user.mention()
-            ),
-        )
+            caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
+                    + f"🎼 **Request Dari:** {message.from_user.mention}",
+                   reply_markup=keyboard)
         os.remove("final.png")
         return await lel.delete()
 
