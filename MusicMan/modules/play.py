@@ -61,9 +61,8 @@ def cb_admin_check(func: Callable) -> Callable:
         admemes = a.get(cb.message.chat.id)
         if cb.from_user.id in admemes:
             return await func(client, cb)
-        else:
-            await cb.answer("Kamu tidak diizinkan!", show_alert=True)
-            return
+        await cb.answer("Kamu tidak diizinkan!", show_alert=True)
+        return
 
     return decorator
 
@@ -96,8 +95,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     heightRatio = maxHeight / image.size[1]
     newWidth = int(widthRatio * image.size[0])
     newHeight = int(heightRatio * image.size[1])
-    newImage = image.resize((newWidth, newHeight))
-    return newImage
+    return image.resize((newWidth, newHeight))
 
 
 async def generate_cover(requested_by, title, views, duration, thumbnail):
@@ -138,9 +136,7 @@ async def playlist(client, message):
     queue = que.get(message.chat.id)
     if not queue:
         await message.reply_text("Player is idle")
-    temp = []
-    for t in queue:
-        temp.append(t)
+    temp = [t for t in queue]
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
     msg = "**Lagu Yang Sedang dimainkan** di {}".format(message.chat.title)
@@ -177,11 +173,7 @@ def updated_stats(chat, queue, vol=100):
 
 
 def r_ply(type_):
-    if type_ == "play":
-        pass
-    else:
-        pass
-    mar = InlineKeyboardMarkup(
+    return InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton("⏹", "leave"),
@@ -195,7 +187,6 @@ def r_ply(type_):
             [InlineKeyboardButton("❌ Close", "cls")],
         ]
     )
-    return mar
 
 
 @Client.on_message(filters.command("current") & filters.group & ~filters.edited)
@@ -239,9 +230,7 @@ async def p_cb(b, cb):
         queue = que.get(cb.message.chat.id)
         if not queue:
             await cb.message.edit("**Sedang tidak Memutar lagu**")
-        temp = []
-        for t in queue:
-            temp.append(t)
+        temp = [t for t in queue]
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
         msg = "**Lagu Yang Sedang dimainkan** di {}".format(cb.message.chat.title)
@@ -307,9 +296,7 @@ async def m_cb(b, cb):
         queue = que.get(cb.message.chat.id)
         if not queue:
             await cb.message.edit("Player is idle")
-        temp = []
-        for t in queue:
-            temp.append(t)
+        temp = [t for t in queue]
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
         msg = "**Now Playing** in {}".format(cb.message.chat.title)
@@ -387,17 +374,16 @@ async def m_cb(b, cb):
                     f"- Skipped track\n- Now Playing **{qeue[0][0]}**"
                 )
 
-    else:
-        if chet_id in callsmusic.pytgcalls.active_calls:
-            try:
-                callsmusic.queues.clear(chet_id)
-            except QueueEmpty:
-                pass
+    elif chet_id in callsmusic.pytgcalls.active_calls:
+        try:
+            callsmusic.queues.clear(chet_id)
+        except QueueEmpty:
+            pass
 
-            callsmusic.pytgcalls.leave_group_call(chet_id)
-            await cb.message.edit("Successfully Left the Chat!")
-        else:
-            await cb.answer("Chat is not connected!", show_alert=True)
+        callsmusic.pytgcalls.leave_group_call(chet_id)
+        await cb.message.edit("Successfully Left the Chat!")
+    else:
+        await cb.answer("Chat is not connected!", show_alert=True)
 
 
 @Client.on_message(command("play") & other_filters)
@@ -425,7 +411,6 @@ async def play(_, message: Message):
                     await lel.edit(
                         "<b>Ingatlah untuk menambahkan Assistant bot ke Channel Anda</b>",
                     )
-                    pass
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
@@ -464,9 +449,10 @@ async def play(_, message: Message):
     if message.reply_to_message:
         entities = []
         toxt = message.reply_to_message.text or message.reply_to_message.caption
-        if message.reply_to_message.entities:
-            entities = message.reply_to_message.entities + entities
-        elif message.reply_to_message.caption_entities:
+        if (
+            message.reply_to_message.entities
+            or message.reply_to_message.caption_entities
+        ):
             entities = message.reply_to_message.entities + entities
         urls = [entity for entity in entities if entity.type == 'url']
         text_links = [
@@ -548,11 +534,9 @@ async def play(_, message: Message):
         )
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await convert(youtube.download(url))        
+        file_path = await convert(youtube.download(url))
     else:
-        query = ""
-        for i in message.command[1:]:
-            query += " " + str(i)
+        query = "".join(" " + str(i) for i in message.command[1:])
         print(query)
         await lel.edit("🎵 **Sedang Memproses Lagu**")
         ydl_opts = {"format": "bestaudio[ext=m4a]"}
@@ -603,8 +587,6 @@ async def play(_, message: Message):
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n" \
                     + f"🎼 **Request Dari:** {message.from_user.mention}",
                    reply_markup=keyboard)
-        os.remove("final.png")
-        return await lel.delete()
     else:
         chat_id = get_chat_id(message.chat)
         que[chat_id] = []
@@ -624,8 +606,9 @@ async def play(_, message: Message):
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
                     + f"🎼 **Request Dari:** {message.from_user.mention}",
                    reply_markup=keyboard)
-        os.remove("final.png")
-        return await lel.delete()
+
+    os.remove("final.png")
+    return await lel.delete()
 
 
 @Client.on_message(filters.command("dplay") & filters.group & ~filters.edited)
@@ -651,7 +634,6 @@ async def deezer(client: Client, message_: Message):
                     await lel.edit(
                         "<b>Ingatlah untuk menambahkan Assistant bot ke Channel Anda</b>",
                     )
-                    pass
                 try:
                     invitelink = await client.export_chat_invite_link(chid)
                 except:
@@ -688,7 +670,7 @@ async def deezer(client: Client, message_: Message):
     queryy = text[1]
     query = queryy
     res = lel
-    await res.edit(f"**Sedang Mencari Lagu** `{queryy}` **dari deezer**")
+    await res.edit(f'**Sedang Mencari Lagu** `{query}` **dari deezer**')
     try:
         songs = await arq.deezer(query,1)
         if not songs.ok:
@@ -776,7 +758,6 @@ async def jiosaavn(client: Client, message_: Message):
                     await lel.edit(
                         "<b>Ingatlah untuk menambahkan Assistant bot ke Channel Anda</b>",
                     )
-                    pass
                 try:
                     invitelink = await client.export_chat_invite_link(chid)
                 except:
