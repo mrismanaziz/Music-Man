@@ -88,11 +88,8 @@ def pause(chat_id: int) -> bool:
 
 
 def resume(chat_id: int) -> bool:
-    if chat_id not in active_chats:
+    if chat_id not in active_chats or active_chats[chat_id]["playing"]:
         return False
-    elif active_chats[chat_id]["playing"]:
-        return False
-
     get_instance(chat_id).resume_playout()
     active_chats[chat_id]["playing"] = True
     return True
