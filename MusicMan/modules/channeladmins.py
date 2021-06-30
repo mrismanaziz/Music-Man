@@ -143,9 +143,12 @@ async def admincache(client, message: Message):
       return
     set(
         chid,
-        [
+        (
             member.user
-            for member in await conchat.linked_chat.get_members(filter="administrators")
-        ],
+            for member in await conchat.linked_chat.get_members(
+                filter="administrators"
+            )
+        ),
     )
+
     await message.reply_text("❇️ Admin cache refreshed!")

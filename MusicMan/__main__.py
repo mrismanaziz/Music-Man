@@ -25,10 +25,8 @@ from MusicMan.config import BOT_TOKEN
 from MusicMan.services.callsmusic import run
 
 response = requests.get(BG_IMAGE)
-file = open("./etc/foreground.png", "wb")
-file.write(response.content)
-file.close()
-
+with open("./etc/foreground.png", "wb") as file:
+    file.write(response.content)
 bot = Bot(
     ":memory:",
     API_ID,
