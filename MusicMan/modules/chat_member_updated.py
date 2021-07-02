@@ -2,9 +2,6 @@ from pyrogram import Client
 from pyrogram.types import ChatMemberUpdated
 
 from MusicMan.function import admins
-from MusicMan.function.admins import admins
-from MusicMan.helpers import admins
-from MusicMan.helpers.admins import get_administrators
 
 
 @Client.on_chat_member_updated()
