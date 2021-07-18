@@ -75,9 +75,11 @@ def cb_admin_check(func: Callable) -> Callable:
 
 
 def transcode(filename):
-    ffmpeg.input(filename).output(
-        "input.raw", format="s16le", acodec="pcm_s16le", ac=2, ar="48k"
-    ).overwrite_output().run()
+    ffmpeg.input(filename).output("input.raw",
+                                  format="s16le",
+                                  acodec="pcm_s16le",
+                                  ac=2,
+                                  ar="48k").overwrite_output().run()
     os.remove(filename)
 
 
@@ -93,7 +95,8 @@ def convert_seconds(seconds):
 # Convert hh:mm:ss to seconds
 def time_to_seconds(time):
     stringt = str(time)
-    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
+    return sum(
+        int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
 # Change image size
@@ -137,7 +140,8 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     os.remove("background.png")
 
 
-@Client.on_message(filters.command("playlist") & filters.group & ~filters.edited)
+@Client.on_message(
+    filters.command("playlist") & filters.group & ~filters.edited)
 async def playlist(client, message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -182,23 +186,22 @@ def updated_stats(chat, queue, vol=100):
 
 
 def r_ply(type_):
-    return InlineKeyboardMarkup(
+    return InlineKeyboardMarkup([
         [
-            [
-                InlineKeyboardButton("⏹", "leave"),
-                InlineKeyboardButton("⏸", "puse"),
-                InlineKeyboardButton("▶️", "resume"),
-                InlineKeyboardButton("⏭", "skip"),
-            ],
-            [
-                InlineKeyboardButton("📖 Playlist", "playlist"),
-            ],
-            [InlineKeyboardButton("❌ Close", "cls")],
-        ]
-    )
+            InlineKeyboardButton("⏹", "leave"),
+            InlineKeyboardButton("⏸", "puse"),
+            InlineKeyboardButton("▶️", "resume"),
+            InlineKeyboardButton("⏭", "skip"),
+        ],
+        [
+            InlineKeyboardButton("📖 Playlist", "playlist"),
+        ],
+        [InlineKeyboardButton("❌ Close", "cls")],
+    ])
 
 
-@Client.on_message(filters.command("current") & filters.group & ~filters.edited)
+@Client.on_message(
+    filters.command("current") & filters.group & ~filters.edited)
 async def ee(client, message):
     if message.chat.id in DISABLED_GROUPS:
         return
@@ -232,8 +235,8 @@ async def settings(client, message):
 
 
 @Client.on_message(
-    filters.command("musicplayer") & ~filters.edited & ~filters.bot & ~filters.private
-)
+    filters.command("musicplayer") & ~filters.edited & ~filters.bot
+    & ~filters.private)
 @authorized_users_only
 async def hfmm(_, message):
     global DISABLED_GROUPS
@@ -262,7 +265,8 @@ async def hfmm(_, message):
         lel = await message.reply("`Processing...`")
 
         if message.chat.id in DISABLED_GROUPS:
-            await lel.edit("**Pemutar Musik Sudah dimatikan Dalam Obrolan Ini**")
+            await lel.edit(
+                "**Pemutar Musik Sudah dimatikan Dalam Obrolan Ini**")
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
@@ -289,7 +293,8 @@ async def p_cb(b, cb):
         temp = [t for t in queue]
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "<b>Lagu Yang Sedang dimainkan</b> di {}".format(cb.message.chat.title)
+        msg = "<b>Lagu Yang Sedang dimainkan</b> di {}".format(
+            cb.message.chat.title)
         msg += "\n- " + now_playing
         msg += "\n- Request Dari " + by
         temp.pop(0)
@@ -305,15 +310,12 @@ async def p_cb(b, cb):
 
 
 @Client.on_callback_query(
-    filters.regex(pattern=r"^(play|pause|skip|leave|puse|resume|menu|cls)$")
-)
+    filters.regex(pattern=r"^(play|pause|skip|leave|puse|resume|menu|cls)$"))
 @cb_admin_check
 async def m_cb(b, cb):
     global que
-    if (
-        cb.message.chat.title.startswith("Channel Music: ")
-        and chat.title[14:].isnumeric()
-    ):
+    if (cb.message.chat.title.startswith("Channel Music: ")
+            and chat.title[14:].isnumeric()):
         chet_id = int(chat.title[13:])
     else:
         chet_id = cb.message.chat.id
@@ -325,27 +327,24 @@ async def m_cb(b, cb):
     the_data = cb.message.reply_markup.inline_keyboard[1][0].callback_data
     if type_ == "pause":
         if (chet_id not in callsmusic.active_chats) or (
-            callsmusic.active_chats[chet_id] == "paused"
-        ):
-            await cb.answer("**Sedang Tidak Terhubung dengan VCG**", show_alert=True)
+                callsmusic.active_chats[chet_id] == "paused"):
+            await cb.answer("**Sedang Tidak Terhubung dengan VCG**",
+                            show_alert=True)
         else:
             callsmusic.pause(chet_id)
             await cb.answer("Music Paused!")
-            await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("play")
-            )
+            await cb.message.edit(updated_stats(m_chat, qeue),
+                                  reply_markup=r_ply("play"))
 
     elif type_ == "play":
         if (chet_id not in callsmusic.active_chats) or (
-            callsmusic.active_chats[chet_id] == "playing"
-        ):
+                callsmusic.active_chats[chet_id] == "playing"):
             await cb.answer("Seda", show_alert=True)
         else:
             callsmusic.resume(chet_id)
             await cb.answer("Music Resumed!")
-            await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
-            )
+            await cb.message.edit(updated_stats(m_chat, qeue),
+                                  reply_markup=r_ply("pause"))
 
     elif type_ == "playlist":
         queue = que.get(cb.message.chat.id)
@@ -354,7 +353,8 @@ async def m_cb(b, cb):
         temp = [t for t in queue]
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Lagu Yang Sedang dimainkan** di {}".format(cb.message.chat.title)
+        msg = "**Lagu Yang Sedang dimainkan** di {}".format(
+            cb.message.chat.title)
         msg += "\n- " + now_playing
         msg += "\n- Request Dari " + by
         temp.pop(0)
@@ -370,21 +370,17 @@ async def m_cb(b, cb):
 
     elif type_ == "resume":
         if (chet_id not in callsmusic.active_chats) or (
-            callsmusic.active_chats[chet_id] == "playing"
-        ):
-            await cb.answer(
-                "**Obrolan tidak terhubung atau sudah diputar**", show_alert=True
-            )
+                callsmusic.active_chats[chet_id] == "playing"):
+            await cb.answer("**Obrolan tidak terhubung atau sudah diputar**",
+                            show_alert=True)
         else:
             callsmusic.resume(chet_id)
             await cb.answer("Music Resumed!")
     elif type_ == "puse":
         if (chet_id not in callsmusic.active_chats) or (
-            callsmusic.active_chats[chet_id] == "paused"
-        ):
-            await cb.answer(
-                "**Obrolan tidak terhubung atau sudah dipause**", show_alert=True
-            )
+                callsmusic.active_chats[chet_id] == "paused"):
+            await cb.answer("**Obrolan tidak terhubung atau sudah dipause**",
+                            show_alert=True)
         else:
             callsmusic.pause(chet_id)
             await cb.answer("Music Paused!")
@@ -395,38 +391,39 @@ async def m_cb(b, cb):
     elif type_ == "menu":
         stats = updated_stats(cb.message.chat, qeue)
         await cb.answer("Menu opened")
-        marr = InlineKeyboardMarkup(
+        marr = InlineKeyboardMarkup([
             [
-                [
-                    InlineKeyboardButton("⏹", "leave"),
-                    InlineKeyboardButton("⏸", "puse"),
-                    InlineKeyboardButton("▶️", "resume"),
-                    InlineKeyboardButton("⏭", "skip"),
-                ],
-                [
-                    InlineKeyboardButton("Playlist 📖", "playlist"),
-                ],
-                [InlineKeyboardButton("❌ Close", "cls")],
-            ]
-        )
+                InlineKeyboardButton("⏹", "leave"),
+                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("▶️", "resume"),
+                InlineKeyboardButton("⏭", "skip"),
+            ],
+            [
+                InlineKeyboardButton("Playlist 📖", "playlist"),
+            ],
+            [InlineKeyboardButton("❌ Close", "cls")],
+        ])
         await cb.message.edit(stats, reply_markup=marr)
     elif type_ == "skip":
         if qeue:
             qeue.pop(0)
         if chet_id not in callsmusic.active_chats:
-            await cb.answer("**Sedang Tidak Terhubung dengan VCG**", show_alert=True)
+            await cb.answer("**Sedang Tidak Terhubung dengan VCG**",
+                            show_alert=True)
         else:
             queues.task_done(chet_id)
             if queues.is_empty(chet_id):
                 callsmusic.stop(chet_id)
-                await cb.message.edit("- Tidak ada Playlist..\n- Keluar dari VCG!")
+                await cb.message.edit(
+                    "- Tidak ada Playlist..\n- Keluar dari VCG!")
             else:
-                await callsmusic.set_stream(chet_id, queues.get(chet_id)["file"])
+                await callsmusic.set_stream(chet_id,
+                                            queues.get(chet_id)["file"])
                 await cb.answer.reply_text("✅ <b>Melewati Lagu</b>")
-                await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
+                await cb.message.edit((m_chat, qeue),
+                                      reply_markup=r_ply(the_data))
                 await cb.message.reply_text(
-                    f"- Skipped track\n- Now Playing **{qeue[0][0]}**"
-                )
+                    f"- Skipped track\n- Now Playing **{qeue[0][0]}**")
 
     elif chet_id in callsmusic.active_chats:
         try:
@@ -437,7 +434,8 @@ async def m_cb(b, cb):
         await callsmusic.stop(chet_id)
         await cb.message.edit("Successfully Left the Chat!")
     else:
-        await cb.answer("**Sedang Tidak Terhubung dengan VCG**", show_alert=True)
+        await cb.answer("**Sedang Tidak Terhubung dengan VCG**",
+                        show_alert=True)
 
 
 @Client.on_message(command("play") & other_filters)
@@ -501,13 +499,13 @@ async def play(_, message: Message):
     if message.reply_to_message:
         entities = []
         toxt = message.reply_to_message.text or message.reply_to_message.caption
-        if (
-            message.reply_to_message.entities
-            or message.reply_to_message.caption_entities
-        ):
+        if (message.reply_to_message.entities
+                or message.reply_to_message.caption_entities):
             entities = message.reply_to_message.entities + entities
         urls = [entity for entity in entities if entity.type == "url"]
-        text_links = [entity for entity in entities if entity.type == "text_link"]
+        text_links = [
+            entity for entity in entities if entity.type == "text_link"
+        ]
     else:
         urls = None
     if text_links:
@@ -515,26 +513,21 @@ async def play(_, message: Message):
     user_id = message.from_user.id
     user_name = message.from_user.first_name
     rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
-    audio = (
-        (message.reply_to_message.audio or message.reply_to_message.voice)
-        if message.reply_to_message
-        else None
-    )
+    audio = ((message.reply_to_message.audio or message.reply_to_message.voice)
+             if message.reply_to_message else None)
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             await lel.edit(
                 f"❌ **Lagu dengan durasi lebih dari** `{DURATION_LIMIT}` **menit tidak bisa diputar!**"
             )
             return
-        keyboard = InlineKeyboardMarkup(
+        keyboard = InlineKeyboardMarkup([
             [
-                [
-                    InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                    InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-                ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-            ]
-        )
+                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+            ],
+            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+        ])
         file_name = get_file_name(audio)
         title = file_name
         thumb_name = "https://telegra.ph/file/ab13882bb05849b6ba170.jpg"
@@ -543,11 +536,9 @@ async def play(_, message: Message):
         views = "Locally added"
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await convert(
-            (await message.reply_to_message.download(file_name))
-            if not path.isfile(path.join("downloads", file_name))
-            else file_name
-        )
+        file_path = await convert((
+            await message.reply_to_message.download(file_name)
+        ) if not path.isfile(path.join("downloads", file_name)) else file_name)
     elif urls:
         query = toxt
         await lel.edit("🎵 **Sedang Memproses Lagu**")
@@ -585,15 +576,13 @@ async def play(_, message: Message):
             pass
         dlurl = url
         dlurl = dlurl.replace("youtube", "youtubepp")
-        keyboard = InlineKeyboardMarkup(
+        keyboard = InlineKeyboardMarkup([
             [
-                [
-                    InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                    InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-                ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-            ]
-        )
+                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+            ],
+            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+        ])
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         file_path = await convert(youtube.download(url))
@@ -625,31 +614,26 @@ async def play(_, message: Message):
                 toxxt += f" ├ **Views** - {results[j]['views']}\n"
                 toxxt += f" └ **Channel** - {results[j]['channel']}\n\n"
 
-            koyboard = InlineKeyboardMarkup(
+            koyboard = InlineKeyboardMarkup([
                 [
-                    [
-                        InlineKeyboardButton(
-                            "1️⃣", callback_data=f"plll 0|{query}|{user_id}"
-                        ),
-                        InlineKeyboardButton(
-                            "2️⃣", callback_data=f"plll 1|{query}|{user_id}"
-                        ),
-                        InlineKeyboardButton(
-                            "3️⃣", callback_data=f"plll 2|{query}|{user_id}"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            "4️⃣", callback_data=f"plll 3|{query}|{user_id}"
-                        ),
-                        InlineKeyboardButton(
-                            "5️⃣", callback_data=f"plll 4|{query}|{user_id}"
-                        ),
-                    ],
-                    [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-                ]
-            )
-            await lel.edit(toxxt, reply_markup=koyboard, disable_web_page_preview=True)
+                    InlineKeyboardButton(
+                        "1️⃣", callback_data=f"plll 0|{query}|{user_id}"),
+                    InlineKeyboardButton(
+                        "2️⃣", callback_data=f"plll 1|{query}|{user_id}"),
+                    InlineKeyboardButton(
+                        "3️⃣", callback_data=f"plll 2|{query}|{user_id}"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "4️⃣", callback_data=f"plll 3|{query}|{user_id}"),
+                    InlineKeyboardButton(
+                        "5️⃣", callback_data=f"plll 4|{query}|{user_id}"),
+                ],
+                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+            ])
+            await lel.edit(toxxt,
+                           reply_markup=koyboard,
+                           disable_web_page_preview=True)
             # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
             return
             # Returning to pornhub
@@ -688,17 +672,18 @@ async def play(_, message: Message):
                 pass
             dlurl = url
             dlurl = dlurl.replace("youtube", "youtubepp")
-            keyboard = InlineKeyboardMarkup(
+            keyboard = InlineKeyboardMarkup([
                 [
-                    [
-                        InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                        InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-                    ],
-                    [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-                ]
-            )
+                    InlineKeyboardButton("📖 Playlist",
+                                         callback_data="playlist"),
+                    InlineKeyboardButton("👑 King",
+                                         url="https://t.me/lifeinsinn"),
+                ],
+                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+            ])
             requested_by = message.from_user.first_name
-            await generate_cover(requested_by, title, views, duration, thumbnail)
+            await generate_cover(requested_by, title, views, duration,
+                                 thumbnail)
             file_path = await convert(youtube.download(url))
     chat_id = get_chat_id(message.chat)
     if chat_id in callsmusic.active_chats:
@@ -711,7 +696,8 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
             + f"🎼 **Request Dari:** {message.from_user.mention}",
             reply_markup=keyboard,
         )
@@ -728,12 +714,12 @@ async def play(_, message: Message):
             await callsmusic.set_stream(chat_id, file_path)
         except:
             message.reply(
-                "**Voice Chat Group tidak aktif, Saya tidak dapat bergabung**"
-            )
+                "**Voice Chat Group tidak aktif, Saya tidak dapat bergabung**")
             return
         await message.reply_photo(
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
             + f"🎼 **Request Dari:** {message.from_user.mention}",
             reply_markup=keyboard,
         )
@@ -838,15 +824,13 @@ async def ytplay(_, message: Message):
         pass
     dlurl = url
     dlurl = dlurl.replace("youtube", "youtubepp")
-    keyboard = InlineKeyboardMarkup(
+    keyboard = InlineKeyboardMarkup([
         [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-            ],
-            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-        ]
-    )
+            InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+            InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+        ],
+        [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+    ])
     requested_by = message.from_user.first_name
     await generate_cover(requested_by, title, views, duration, thumbnail)
     file_path = await convert(youtube.download(url))
@@ -861,7 +845,8 @@ async def ytplay(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
             + f"🎼 **Request Dari:** {message.from_user.mention}",
             reply_markup=keyboard,
         )
@@ -877,11 +862,13 @@ async def ytplay(_, message: Message):
         try:
             await callsmusic.set_stream(chat_id, file_path)
         except:
-            message.reply("Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
+            message.reply(
+                "Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
             return
         await message.reply_photo(
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
             + f"🎼 **Request Dari:** {message.from_user.mention}",
             reply_markup=keyboard,
         )
@@ -975,15 +962,13 @@ async def deezer(client: Client, message_: Message):
     except:
         pass
 
-    keyboard = InlineKeyboardMarkup(
+    keyboard = InlineKeyboardMarkup([
         [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-            ],
-            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-        ]
-    )
+            InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+            InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+        ],
+        [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+    ])
     file_path = await convert(wget.download(url))
     await res.edit("Generating Thumbnail")
     await generate_cover(requested_by, title, artist, duration, thumbnail)
@@ -1011,7 +996,8 @@ async def deezer(client: Client, message_: Message):
         try:
             await callsmusic.set_stream(chat_id, file_path)
         except:
-            res.edit("Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
+            res.edit(
+                "Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
             return
 
     await res.delete()
@@ -1108,15 +1094,13 @@ async def jiosaavn(client: Client, message_: Message):
             return
     except:
         pass
-    keyboard = InlineKeyboardMarkup(
+    keyboard = InlineKeyboardMarkup([
         [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-            ],
-            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-        ]
-    )
+            InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+            InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+        ],
+        [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+    ])
     file_path = await convert(wget.download(slink))
     chat_id = get_chat_id(message_.chat)
     if chat_id in callsmusic.active_chats:
@@ -1147,7 +1131,8 @@ async def jiosaavn(client: Client, message_: Message):
         try:
             await callsmusic.set_stream(chat_id, file_path)
         except:
-            res.edit("Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
+            res.edit(
+                "Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
             return
     await res.edit("Generating Thumbnail.")
     await generate_cover(requested_by, sname, ssingers, sduration, sthumb)
@@ -1176,9 +1161,8 @@ async def lol_cb(b, cb):
         return
     useer_id = int(useer_id)
     if cb.from_user.id != useer_id:
-        await cb.answer(
-            "Anda bukan orang yang meminta untuk memutar lagu!", show_alert=True
-        )
+        await cb.answer("Anda bukan orang yang meminta untuk memutar lagu!",
+                        show_alert=True)
         return
     await cb.message.edit("🔄 **Sedang Memproses Lagu**")
     x = int(x)
@@ -1216,15 +1200,13 @@ async def lol_cb(b, cb):
         return
     dlurl = url
     dlurl = dlurl.replace("youtube", "youtubepp")
-    keyboard = InlineKeyboardMarkup(
+    keyboard = InlineKeyboardMarkup([
         [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
-            ],
-            [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
-        ]
-    )
+            InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
+            InlineKeyboardButton("👑 King", url="https://t.me/lifeinsinn"),
+        ],
+        [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+    ])
     requested_by = useer_name
     await generate_cover(requested_by, title, views, duration, thumbnail)
     file_path = await convert(youtube.download(url))
@@ -1243,7 +1225,8 @@ async def lol_cb(b, cb):
         await b.send_photo(
             chat_id,
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n"
             + f"🎼 **Request Dari:** {r_by.mention}",
             reply_markup=keyboard,
         )
@@ -1264,7 +1247,8 @@ async def lol_cb(b, cb):
         await b.send_photo(
             chat_id,
             photo="final.png",
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
+            caption=
+            f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n"
             + f"🎼 **Request Dari:** {r_by.mention}",
             reply_markup=keyboard,
         )
