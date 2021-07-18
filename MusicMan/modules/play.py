@@ -25,33 +25,25 @@ import aiohttp
 import ffmpeg
 import requests
 import wget
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
-from pyrogram import Client
-from pyrogram import filters
-from pyrogram.types import Voice
+from PIL import Image, ImageDraw, ImageFont
+from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant
-from pyrogram.types import InlineKeyboardButton
-from pyrogram.types import InlineKeyboardMarkup
-from pyrogram.types import Message
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
+                            Message, Voice)
 from Python_ARQ import ARQ
 from youtube_search import YoutubeSearch
 
-from MusicMan.config import ARQ_API_KEY
+from MusicMan.config import ARQ_API_KEY, ASSISTANT_NAME
 from MusicMan.config import BOT_NAME as bn
 from MusicMan.config import DURATION_LIMIT
-from MusicMan.config import ASSISTANT_NAME
 from MusicMan.config import UPDATES_CHANNEL as updateschannel
 from MusicMan.config import que
 from MusicMan.function.admins import admins as a
 from MusicMan.helpers.admins import get_administrators
 from MusicMan.helpers.channelmusic import get_chat_id
+from MusicMan.helpers.decorators import authorized_users_only, errors
 from MusicMan.helpers.errors import DurationLimitError
-from MusicMan.helpers.decorators import errors
-from MusicMan.helpers.decorators import authorized_users_only
-from MusicMan.helpers.filters import command
-from MusicMan.helpers.filters import other_filters
+from MusicMan.helpers.filters import command, other_filters
 from MusicMan.helpers.gets import get_file_name
 from MusicMan.services.callsmusic import callsmusic
 from MusicMan.services.callsmusic import client as USER
