@@ -1,11 +1,9 @@
 # Daisyxmusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
-
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
-
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,14 +11,21 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 import logging
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram import Client
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup
+from pyrogram.types import Message
 
-from MusicMan.config import (ASSISTANT_NAME, BOT_USERNAME, OWNER, PROJECT_NAME,
-                             SOURCE_CODE, SUPPORT_GROUP, UPDATES_CHANNEL)
+from MusicMan.config import ASSISTANT_NAME
+from MusicMan.config import BOT_USERNAME
+from MusicMan.config import OWNER
+from MusicMan.config import PROJECT_NAME
+from MusicMan.config import SOURCE_CODE
+from MusicMan.config import SUPPORT_GROUP
+from MusicMan.config import UPDATES_CHANNEL
 from MusicMan.modules.msg import Messages as tr
 
 logging.basicConfig(level=logging.INFO)
