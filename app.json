@@ -2,17 +2,21 @@
   "name": "Music Man",
   "logo": "https://telegra.ph/file/36ff1b571aa11df5812de.jpg",
   "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
-  "keywords": ["music", "voicechat", "telegram"],
+  "keywords": [
+    "music",
+    "voicechat",
+    "telegram"
+  ],
   "repository": "https://github.com/mrismanaziz/Music-Man",
   "stack": "heroku-20",
   "buildpacks": [
-   {
-     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-   },
-   {
-     "url": "heroku/python"
-   }   
-  ],        
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ],
   "env": {
     "SESSION_NAME": {
       "description": "Masukan String Session Pyrogram (P) untuk assistant yang naik ke VCG",
@@ -49,17 +53,17 @@
       "description": "Ambil api ARQ dari bot telegram » t.me/ARQRobot atau @ARQRobot",
       "required": true,
       "value": ""
-    },    
+    },
     "BG_IMAGE": {
       "description": "Custom Background Play Musik Gunakan Foto yang Transparant format .png / .jpg",
       "required": false,
       "value": "https://telegra.ph/file/cd0b87484429704c7b935.png"
-    },     
+    },
     "UPDATES_CHANNEL": {
       "description": "Updates Channel tanpa @ [skip ini jika Anda tidak punya]",
       "required": false,
       "value": "Lunatic0de"
-    },    
+    },
     "API_ID": {
       "description": "Masukan APP ID Silahkan Ambil dari my.telegram.org/apps atau t.me/scrapmanbot",
       "required": true
@@ -68,7 +72,7 @@
       "description": "Ubah Ke TURN OFF untuk mematikan",
       "required": false,
       "value": "ENABLE"
-    },    
+    },
     "API_HASH": {
       "description": "Masukan API HASH Silahkan Ambil dari my.telegram.org/apps atau t.me/scrapmanbot",
       "required": true
